@@ -8,23 +8,22 @@ import type { CatalogService } from '../../data/catalogService';
 import type { HomeCatalog, Title } from '../../types';
 
 const testTitle: Title = {
-  id: 'harbor-lights',
-  name: 'Harbor Lights',
+  id: 'tvmaze-1396',
+  name: 'Breaking Bad',
   kind: 'series',
-  year: 2024,
-  seasons: 2,
-  rating: 'TV-MA',
-  genres: ['Drama'],
-  description: 'A dockside investigator uncovers a smuggling network.',
-  artworkUrl: 'https://example.com/harbor-lights.jpg',
+  year: 2008,
+  rating: '9.5/10',
+  genres: ['Drama', 'Crime', 'Thriller'],
+  description: 'A high school chemistry teacher turned meth producer.',
+  artworkUrl: 'https://static.tvmaze.com/uploads/images/original_untouched/81/202627.jpg',
 };
 
 const testCatalog: HomeCatalog = {
   titles: { [testTitle.id]: testTitle },
   rails: [
-    { id: 'trending', title: 'Trending this week', itemIds: [testTitle.id] },
-    { id: 'new', title: 'New on StreamShelf', itemIds: [testTitle.id] },
-    { id: 'staff', title: 'Staff picks', itemIds: [testTitle.id] },
+    { id: 'popular', title: 'Popular right now', itemIds: [testTitle.id] },
+    { id: 'new', title: 'New and recently premiered', itemIds: [testTitle.id] },
+    { id: 'drama', title: 'Drama picks', itemIds: [testTitle.id] },
   ],
 };
 
@@ -55,10 +54,10 @@ describe('HomeScreen', () => {
     expect(screen.getByTestId('status-loading')).toBeTruthy();
 
     resolveHome(testCatalog);
-    expect(await screen.findByText('Trending this week')).toBeTruthy();
-    expect(screen.getByText('New on StreamShelf')).toBeTruthy();
-    expect(screen.getByText('Staff picks')).toBeTruthy();
-    expect(screen.getByLabelText(/Harbor Lights/)).toBeTruthy();
+    expect(await screen.findByText('Popular right now')).toBeTruthy();
+    expect(screen.getByText('New and recently premiered')).toBeTruthy();
+    expect(screen.getByText('Drama picks')).toBeTruthy();
+    expect(screen.getByLabelText(/Breaking Bad/)).toBeTruthy();
   });
 
   it('shows an error with retry when the catalog fails', async () => {

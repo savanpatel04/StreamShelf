@@ -40,8 +40,3 @@ yarn-error.*
 /ios
 /android
 
-# local project instructions and licensing files
-AGENTS.md
-CLAUDE.md
-LICENSE
-.claude/

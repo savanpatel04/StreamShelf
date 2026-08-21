@@ -12,15 +12,14 @@ import type { Title } from '../../types';
 
 const Stack = createNativeStackNavigator<{ Detail: DetailParams }>();
 const testTitle: Title = {
-  id: 'harbor-lights',
-  name: 'Harbor Lights',
+  id: 'tvmaze-1396',
+  name: 'Breaking Bad',
   kind: 'series',
-  year: 2024,
-  seasons: 2,
-  rating: 'TV-MA',
-  genres: ['Drama'],
-  description: 'A dockside investigator uncovers a smuggling network.',
-  artworkUrl: 'https://example.com/harbor-lights.jpg',
+  year: 2008,
+  rating: '9.5/10',
+  genres: ['Drama', 'Crime', 'Thriller'],
+  description: 'A high school chemistry teacher turned meth producer.',
+  artworkUrl: 'https://static.tvmaze.com/uploads/images/original_untouched/81/202627.jpg',
 };
 
 async function renderDetail() {
@@ -42,7 +41,7 @@ async function renderDetail() {
                 name="Detail"
                 component={DetailScreen}
                 initialParams={{
-                  titleId: 'harbor-lights',
+                  titleId: 'tvmaze-1396',
                   preview: testTitle,
                 }}
               />
