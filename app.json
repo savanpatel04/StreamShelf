@@ -1,14 +1,11 @@
 {
   "expo": {
-    "name": "StreamShelf_Copilot",
-    "slug": "StreamShelf_Copilot",
+    "name": "StreamShelf",
+    "slug": "streamshelf",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "ios": {
-      "supportsTablet": true
-    },
+    "userInterfaceStyle": "dark",
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
@@ -16,10 +13,17 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.streamshelf"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "@react-native-tvos/config-tv"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.anonymous.streamshelf"
     }
   }
 }
