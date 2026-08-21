@@ -154,9 +154,6 @@ describe('createCatalogService', () => {
     // First attempt fails
     await expect(service.getHome()).rejects.toBeInstanceOf(CatalogError);
 
-    // Reset counter for next attempt
-    attemptCount = 0;
-    
     // Second attempt succeeds
     const home = await service.getHome();
     expect(home.rails).toHaveLength(3);

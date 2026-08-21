@@ -57,7 +57,7 @@ describe('HomeScreen', () => {
     expect(await screen.findByText('Popular right now')).toBeTruthy();
     expect(screen.getByText('New and recently premiered')).toBeTruthy();
     expect(screen.getByText('Drama picks')).toBeTruthy();
-    expect(screen.getByLabelText(/Breaking Bad/)).toBeTruthy();
+    expect(screen.getAllByLabelText(/Breaking Bad/)).toHaveLength(3);
   });
 
   it('shows an error with retry when the catalog fails', async () => {
@@ -68,6 +68,7 @@ describe('HomeScreen', () => {
       failureRate: 1,
       sleep: async () => undefined,
       random: () => (shouldFail ? 0 : 1),
+      catalog: testCatalog,
     });
 
     await renderHome(service);
@@ -78,6 +79,6 @@ describe('HomeScreen', () => {
     shouldFail = false;
     await user.press(screen.getByTestId('status-action'));
 
-    expect(await screen.findByText('Trending this week')).toBeTruthy();
+    expect(await screen.findByText('Popular right now')).toBeTruthy();
   });
 });
