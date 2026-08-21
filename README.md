@@ -15,7 +15,7 @@ Expo (SDK 57, TypeScript blank template) keeps the project runnable with Expo Go
 | iOS (Expo Go or simulator) | Primary |
 | Android (Expo Go or emulator) | Primary |
 | Expo web | Works for keyboard/D-pad style navigation; layout is phone-first |
-| Apple TV / Android TV store builds | Not a dedicated `react-native-tvos` app. Focus rings and a spatial navigator are in place so a remote or keyboard can move between posters, tabs, and actions |
+| Apple TV / Android TV development builds | Supported through the React Native TV fork; focus rings and spatial navigation support remote/D-pad input |
 
 Node: Expo / RN 0.86 prefer Node 20.19+, 22, or 24. This machine had Node 21, which installs with engine warnings. Use Node 22 if you can (`.nvmrc`).
 
@@ -42,6 +42,26 @@ npm run start:tvos
 ```
 
 Launch the Debug app in the Apple TV simulator. If it stays on **Searching for development servers**, choose **Enter URL manually** and enter the exact URL and port printed by the command above. Keep Metro running while using the app.
+
+### Android TV development build
+
+The Android TV configuration is enabled for the native project while keeping the APK compatible with regular Android devices. Regenerate native files once after changing TV configuration:
+
+```bash
+npx expo prebuild --clean
+npm run android:tv
+```
+
+Use an Android TV emulator or a physical Android TV device. Start Metro separately with `npm run start:tvos`, then launch the installed Debug app. The app does not currently include a dedicated Android TV banner asset, so add one before store submission.
+
+On an ARM64 Android TV device, the APK can be built directly with:
+
+```bash
+cd android
+ANDROID_HOME="$HOME/Library/Android/sdk" ./gradlew :app:assembleDebug -PreactNativeArchitectures=arm64-v8a
+```
+
+The default multi-ABI build may fail on machines with an incomplete x86 Android NDK toolchain; that does not affect the ARM64 APK.
 
 The catalog service waits ~700ms and fails about 20% of the time so you can exercise loading, error, and retry. Pull to refresh on Home to request again.
 

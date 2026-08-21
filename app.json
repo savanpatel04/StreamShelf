@@ -20,7 +20,13 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "@react-native-tvos/config-tv"
+      [
+        "@react-native-tvos/config-tv",
+        {
+          "isTV": true,
+          "androidTVRequired": false
+        }
+      ]
     ],
     "ios": {
       "bundleIdentifier": "com.anonymous.streamshelf"

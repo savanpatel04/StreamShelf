@@ -9,6 +9,7 @@ import { DetailScreen } from '../screens/DetailScreen';
 import { MyListScreen } from '../screens/MyListScreen';
 import { colors, spacing } from '../theme';
 import type { HomeStackParamList, MyListStackParamList, RootTabParamList } from './types';
+import { Focusable } from '../components/Focusable';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
@@ -41,15 +42,30 @@ function TopBar() {
       </Pressable>
 
       <View style={styles.navGroup}>
-        <Pressable onPress={() => goToTab('HomeTab')}>
+        <Focusable
+          onPress={() => goToTab('HomeTab')}
+          style={styles.navButton}
+          focusedStyle={styles.navButtonFocused}
+          accessibilityLabel="Go to Home"
+        >
           <Text style={styles.navItem}>Home</Text>
-        </Pressable>
-        <Pressable onPress={() => goToTab('MyListTab')}>
+        </Focusable>
+        <Focusable
+          onPress={() => goToTab('MyListTab')}
+          style={styles.navButton}
+          focusedStyle={styles.navButtonFocused}
+          accessibilityLabel="Go to My List"
+        >
           <Text style={styles.navItem}>My List</Text>
-        </Pressable>
-        <Pressable style={styles.profileButton} accessibilityRole="button" onPress={() => {}}>
+        </Focusable>
+        <Focusable
+          style={[styles.navButton, styles.profileButton]}
+          focusedStyle={styles.navButtonFocused}
+          accessibilityLabel="Profile"
+          onPress={() => {}}
+        >
           <Text style={styles.profileIcon}>👤</Text>
-        </Pressable>
+        </Focusable>
       </View>
     </View>
   );
@@ -127,15 +143,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  navButton: {
+    marginRight: spacing.sm,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+  },
+  navButtonFocused: {
+    borderColor: colors.focus,
+  },
   navItem: {
     color: '#0F172A',
     fontSize: 15,
     fontWeight: '600',
-    marginRight: spacing.md,
   },
   profileButton: {
     width: 32,
     height: 32,
+    marginRight: 0,
+    paddingHorizontal: 0,
+    paddingVertical: 0,
     borderRadius: 16,
     backgroundColor: '#DCEEFF',
     alignItems: 'center',
