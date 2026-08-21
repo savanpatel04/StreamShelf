@@ -59,7 +59,7 @@ export function HomeScreen() {
       <View style={styles.screen}>
         <StatusState
           status="error"
-          message={`${error} This is an occasional simulated outage — try again.`}
+          message={`${error} Check your connection and try again.`}
           actionLabel="Retry"
           onAction={() => {
             void load();

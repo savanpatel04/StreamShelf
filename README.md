@@ -74,7 +74,7 @@ npm run typecheck
 
 ## What is implemented
 
-- **Home** — three horizontal rails from a local fixture catalog (`Trending`, `New on StreamShelf`, `Staff picks`).
+- **Home** — three horizontal rails populated from the live TVMaze public API (`Popular right now`, `New and recently premiered`, `Drama picks`).
 - **Detail** — artwork, description, year/type/rating/runtime, add/remove **My List**.
 - **My List** — persisted with AsyncStorage as full title objects, so the shelf still works after a process restart even if the catalog request fails.
 - **States** — loading, empty My List, catalog error with retry.
@@ -83,7 +83,7 @@ npm run typecheck
 
 ## Key decisions
 
-1. **Fake network, real asynchrony.** A public API would add keys, rate limits, and flaky CI. `createCatalogService` injects `sleep`, `random`, and `failureRate` so production-like delays exist in the app and tests stay deterministic.
+1. **Live catalog, deterministic tests.** The production service reads TVMaze without an API key and maps its response into the app's catalog model. `createCatalogService` still supports fixture-backed data, injected latency, and controlled failures so tests stay deterministic.
 2. **Persist titles, not only IDs.** My List is the one dataset that must survive restart. Storing `Title` JSON avoids a second catalog fetch on launch.
 3. **Preview params on Detail.** Rails pass the title they already have so the screen can render immediately; a follow-up `getTitle` call refreshes when the network works.
 4. **Directional input as a layer, not a TV fork.** A registry of on-screen controls plus `findNeighbor` is small enough to test without standing up tvOS. It is not a full 10-foot UI.
