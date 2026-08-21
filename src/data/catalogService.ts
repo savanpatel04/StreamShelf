@@ -1,4 +1,3 @@
-import { catalogFixture } from './fixtures';
 import type { HomeCatalog, Title } from '../types';
 
 export class CatalogError extends Error {
@@ -43,6 +42,7 @@ export function createCatalogService(
   const random = options.random ?? Math.random;
   const sleep = options.sleep ?? defaultSleep;
   const fetcher = options.fetch ?? globalThis.fetch;
+  const catalog = options.catalog;
 
   if (!fetcher && options.live) {
     throw new Error('A fetch implementation is required for live catalog data.');
@@ -60,7 +60,10 @@ export function createCatalogService(
     getHome: () =>
       withLatency(async () => {
         if (!options.live) {
-          return options.catalog ?? catalogFixture;
+          if (!catalog) {
+            throw new CatalogError('No test catalog was configured.');
+          }
+          return catalog;
         }
         const shows = await fetchShows(fetcher!);
         return createHomeCatalog(shows);
@@ -68,8 +71,7 @@ export function createCatalogService(
     getTitle: (id: string) =>
       withLatency(async () => {
         if (!options.live) {
-          const catalog = options.catalog ?? catalogFixture;
-          const title = catalog.titles[id];
+          const title = catalog?.titles[id];
           if (!title) {
             throw new TitleNotFoundError(id);
           }

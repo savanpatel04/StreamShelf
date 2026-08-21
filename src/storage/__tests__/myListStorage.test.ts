@@ -1,6 +1,18 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MY_LIST_STORAGE_KEY, createMyListStorage } from '../myListStorage';
-import { catalogFixture } from '../../data/fixtures';
+import type { Title } from '../../types';
+
+const testTitle: Title = {
+  id: 'harbor-lights',
+  name: 'Harbor Lights',
+  kind: 'series',
+  year: 2024,
+  seasons: 2,
+  rating: 'TV-MA',
+  genres: ['Drama'],
+  description: 'A dockside investigator uncovers a smuggling network.',
+  artworkUrl: 'https://example.com/harbor-lights.jpg',
+};
 
 describe('myListStorage', () => {
   beforeEach(async () => {
@@ -9,7 +21,7 @@ describe('myListStorage', () => {
 
   it('round-trips saved titles', async () => {
     const storage = createMyListStorage();
-    const title = catalogFixture.titles['harbor-lights']!;
+    const title = testTitle;
     await storage.save([title]);
 
     const loaded = await storage.load();

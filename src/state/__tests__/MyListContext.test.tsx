@@ -4,7 +4,32 @@ import { Text } from 'react-native';
 import { act, render, screen, waitFor } from '@testing-library/react-native';
 import { MyListProvider, useMyList } from '../MyListContext';
 import { createMyListStorage } from '../../storage/myListStorage';
-import { catalogFixture } from '../../data/fixtures';
+import type { Title } from '../../types';
+
+const testTitles: Title[] = [
+  {
+    id: 'kiln',
+    name: 'Kiln',
+    kind: 'movie',
+    year: 2024,
+    runtimeMinutes: 104,
+    rating: 'PG-13',
+    genres: ['Documentary'],
+    description: 'A ceramicist rebuilds a wood-fired kiln.',
+    artworkUrl: 'https://example.com/kiln.jpg',
+  },
+  {
+    id: 'harbor-lights',
+    name: 'Harbor Lights',
+    kind: 'series',
+    year: 2024,
+    seasons: 2,
+    rating: 'TV-MA',
+    genres: ['Drama'],
+    description: 'A dockside investigator uncovers a smuggling network.',
+    artworkUrl: 'https://example.com/harbor-lights.jpg',
+  },
+];
 
 function Probe() {
   const { titles, isReady } = useMyList();
@@ -21,7 +46,7 @@ describe('MyListProvider', () => {
 
   it('restores titles from storage after a remount', async () => {
     const storage = createMyListStorage();
-    await storage.save([catalogFixture.titles['kiln']!]);
+    await storage.save([testTitles[0]]);
 
     const view = await render(
       <MyListProvider storage={storage}>
@@ -45,7 +70,7 @@ describe('MyListProvider', () => {
 
   it('keeps all titles when many are added in quick succession', async () => {
     const storage = createMyListStorage();
-    const titles = Object.values(catalogFixture.titles);
+    const titles = testTitles;
 
     let api: ReturnType<typeof useMyList> | undefined;
 

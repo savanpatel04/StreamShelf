@@ -7,10 +7,21 @@ import { MyListProvider } from '../../state/MyListContext';
 import { DirectionalNavProvider } from '../../focus/DirectionalNav';
 import { createCatalogService } from '../../data/catalogService';
 import { createMyListStorage } from '../../storage/myListStorage';
-import { catalogFixture } from '../../data/fixtures';
 import type { DetailParams } from '../../navigation/types';
+import type { Title } from '../../types';
 
 const Stack = createNativeStackNavigator<{ Detail: DetailParams }>();
+const testTitle: Title = {
+  id: 'harbor-lights',
+  name: 'Harbor Lights',
+  kind: 'series',
+  year: 2024,
+  seasons: 2,
+  rating: 'TV-MA',
+  genres: ['Drama'],
+  description: 'A dockside investigator uncovers a smuggling network.',
+  artworkUrl: 'https://example.com/harbor-lights.jpg',
+};
 
 async function renderDetail() {
   const service = createCatalogService({
@@ -32,7 +43,7 @@ async function renderDetail() {
                 component={DetailScreen}
                 initialParams={{
                   titleId: 'harbor-lights',
-                  preview: catalogFixture.titles['harbor-lights'],
+                  preview: testTitle,
                 }}
               />
             </Stack.Navigator>
