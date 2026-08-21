@@ -10,11 +10,11 @@ Expo (SDK 57, TypeScript blank template) keeps the project runnable with Expo Go
 
 ## Supported targets
 
-| Target | Status |
-| --- | --- |
-| iOS (Expo Go or simulator) | Primary |
-| Android (Expo Go or emulator) | Primary |
-| Expo web | Works for keyboard/D-pad style navigation; layout is phone-first |
+| Target                                   | Status                                                                                                    |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| iOS (Expo Go or simulator)               | Primary                                                                                                   |
+| Android (Expo Go or emulator)            | Primary                                                                                                   |
+| Expo web                                 | Works for keyboard/D-pad style navigation; layout is phone-first                                          |
 | Apple TV / Android TV development builds | Supported through the React Native TV fork; focus rings and spatial navigation support remote/D-pad input |
 
 Node: Expo / RN 0.86 prefer Node 20.19+, 22, or 24. This machine had Node 21, which installs with engine warnings. Use Node 22 if you can (`.nvmrc`).
