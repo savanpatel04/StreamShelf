@@ -33,6 +33,16 @@ npx expo start
 
 Then press `i` for iOS, `a` for Android, or `w` for web. Or scan the QR code with Expo Go.
 
+### tvOS development client
+
+The generated tvOS target uses Expo Dev Launcher and must connect to a running Metro server.
+
+```bash
+npm run start:tvos
+```
+
+Launch the Debug app in the Apple TV simulator. If it stays on **Searching for development servers**, choose **Enter URL manually** and enter the exact URL and port printed by the command above. Keep Metro running while using the app.
+
 The catalog service waits ~700ms and fails about 20% of the time so you can exercise loading, error, and retry. Pull to refresh on Home to request again.
 
 ## Test
